@@ -1,0 +1,495 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: 朱广成
+  Date: 2022/6/23
+  Time: 10:48
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page import="java.sql.*" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>小米商城 - Xiaomi 11 Ultra、Redmi K40 Pro、MIX FOLD，小米电视官方网站</title>
+    <script>
+
+        // Cookie[] cookie=new Cookie("1","1");
+        // document.cookie=
+
+
+        window.onload=function() {
+
+            function enroll() {
+                window.location.href = "注册.jsp";
+
+            }
+
+
+            var o1 = document.getElementsByClassName("s1");
+            var o2 = document.getElementById("goods2");
+            var o3 = document.getElementById("shouji");
+            var o4 = document.getElementById("dianshi");
+            var arr = new Array();
+
+            o1[0].onmouseover = function () {
+                o2.style.display = "block";
+                o3.style.display = "block";
+                o4.style.display = "none";
+
+                o2.onmouseover = function () {
+                    o2.style.display = "block";
+                    o3.style.display = "block";
+                };
+                o2.onmouseout = function () {
+                    o2.style.display = "none";
+                    o3.style.display = "none";
+                };
+            };
+
+            o1[1].onmouseover = function () {
+                o2.style.display = "block";
+                o4.style.display = "block";
+                o3.style.display = "none";
+
+                o2.onmouseover = function () {
+                    o2.style.display = "block";
+                    o4.style.display = "block";
+                };
+                o2.onmouseout = function () {
+                    o2.style.display = "none";
+                    o4.style.display = "none";
+                };
+            };
+
+            for (var i = 2; i < o1.length; i++) {
+                o1[i].onmouseover = function () {
+                    o2.style.display = "none";
+                };
+            }
+
+            //    设置上册导航条的状态
+            var o5 = document.getElementsByClassName("top-goods");
+            var o6 = document.getElementsByClassName("show-goods");
+            var o7 = document.getElementsByClassName("goods-info");
+
+            o6[0].onmouseover = function () {
+                o5[0].style.display = "block";
+                o5[1].style.display = "none";
+                o5[2].style.display = "none";
+            }
+            o6[1].onmouseover = function () {
+                o5[0].style.display = "none";
+                o5[1].style.display = "block";
+                o5[2].style.display = "none";
+            }
+            o6[2].onmouseover = function () {
+                o5[0].style.display = "none";
+                o5[1].style.display = "none";
+                o5[2].style.display = "block";
+            }
+        }
+
+        //设置添加购物车
+    </script>
+</head>
+<!-- 引入重置样式表 -->
+<link rel="stylesheet" href="./CSS/reset.css">
+<!-- 引入公共样式表 -->
+<link rel="stylesheet" href="./CSS/base.CSS">
+<!-- 引入图标字体库 -->
+<link rel="stylesheet" href="./fa/css/all.css">
+<!-- 引入当前页面的样式表 -->
+<link rel="stylesheet" href="./CSS/index.css">
+
+<!-- 设置网站的图标(在标题栏和收藏栏)
+       -网站图标一般都存储在网站的根目录下,名字一般叫icon
+-->
+<link rel="icon" href="./img/favicon.ico">
+<body>
+
+<!-- 创建顶部导航条 -->
+<!-- 顶部导航条外部容器 -->
+<div class="topbar-wrapper">
+    <div class="topbar w">
+        <!-- 左侧导航条 -->
+        <ul class="service">
+            <li><a href="javascript:;">小米商城</a></li>
+            <li class="line">|</li>
+            <li><a href="javascript:;">MIUI</a></li>
+            <li class="line">|</li>
+            <li><a href="javascript:;">loT</a></li>
+            <li class="line">|</li>
+            <li><a href="javascript:;">云服务</a></li>
+            <li class="line">|</li>
+            <li><a href="javascript:;">天星科技</a></li>
+            <li class="line">|</li>
+            <li><a href="javascript:;">有品</a></li>
+            <li class="line">|</li>
+            <li><a href="javascript:;">小爱开放平台</a></li>
+            <li class="line">|</li>
+            <li><a href="javascript:;">企业回购</a></li>
+            <li class="line">|</li>
+            <li><a href="javascript:;">资质证照</a></li>
+            <li class="line">|</li>
+            <li><a href="javascript:;">协议规则</a></li>
+            <li class="line">|</li>
+            <li class="app-wrapper">
+                <a class="app" href="javascript:;">
+                    下载app
+                    <!-- 添加一个弹出层 -->
+                    <div class="qrcode">
+                        <img src="./img/小米.png" alt="">
+                        <span>小米商城APP</span>
+                    </div>
+
+                </a>
+            </li>
+            <li class="line">|</li>
+            <li><a href="javascript:;">Select location</a></li>
+            <li class="line">|</li>
+        </ul>
+        <!-- 购物车 -->
+        <ul class="shop-cart">
+            <li><a class="shop" href="javascript:;">
+                <i class="fas fa-shopping-cart">
+                    <input type="button" value="购物车" onclick="window.location.href='shopping.jsp'" style="background-color: #5f5750;">
+                </i>
+                <!-- 添加一个弹出层 -->
+                <!--                        <div class="gw">-->
+                <!--                            <span>你还没有购买任何物品</span>-->
+                <!--                        </div>-->
+
+            </a></li>
+        </ul>
+        <!-- 用户登录注册 -->
+        <ul class="user-info">
+            <li>
+                <a href="web\注册.jsp" >登录</a>
+            </li>
+            <li class="line">|</li>
+            <li><a href="javascript:;">注册</a></li>
+            <li class="line">|</li>
+            <li><a href="javascript:;">消息通知</a></li>
+            <li class="line">|</li>
+        </ul>
+
+    </div>
+
+
+</div>
+<!-- 创建一个头部的外部容器 -->
+<div class="header-wrapper">
+    <div class="header w clearfix">
+        <!-- 创建一个logo -->
+        <h1 class="logo">
+            <a href="/"></a>
+        </h1>
+        <!-- 创建一个中间导航条的容器 -->
+        <div class="nav-wrapper">
+            <!-- 创建导航条 -->
+            <ul class="nav">
+                <li class="all-goods-wrapper">
+                    <a class="all-goods" href="#">全部商品分类</a>
+                    <ul class="left-menu">
+                        <li class="s1">
+                            <a href="#">手机
+                                <i class="fas fa-angle-right"></i>
+                            </a>
+                        </li>
+
+                        <li class="s1">
+                            <a href="#">电视
+                                <i class="fas fa-angle-right"></i>
+                            </a>
+                        </li>
+                        <li class="s1">
+                            <a href="#">笔记本 平板
+                                <i class="fas fa-angle-right"></i>
+                            </a>
+                        </li>
+                        <li class="s1">
+                            <a href="#">家电
+                                <i class="fas fa-angle-right"></i>
+                            </a>
+                        </li>
+                        <li class="s1">
+                            <a href="#">出行 穿戴
+                                <i class="fas fa-angle-right"></i>
+                            </a>
+                        </li>
+                        <li class="s1">
+                            <a href="#">智能 路由器
+                                <i class="fas fa-angle-right"></i>
+                            </a>
+                        </li>
+                        <li class="s1">
+                            <a href="#">电源 配件
+                                <i class="fas fa-angle-right"></i>
+                            </a>
+                        </li>
+                        <li class="s1" >
+                            <a href="#">健康 儿童
+                                <i class="fas fa-angle-right"></i>
+                            </a>
+                        </li>
+                        <li class="s1">
+                            <a href="#">耳机 音响
+                                <i class="fas fa-angle-right"></i>
+                            </a>
+                        </li>
+                        <li class="s1">
+                            <a href="#">生活 箱包
+                                <i class="fas fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="show-goods"><a href="#">Xiaomi手机</a></li>
+                <li class="show-goods"><a href="#">Redmi红米</a></li>
+                <li class="show-goods"><a href="#">笔记本</a></li>
+                <li class="show-goods"><a href="#">电视</a></li>
+                <li class="show-goods"><a href="#">平板</a></li>
+                <li class="show-goods"><a href="#">路由器</a></li>
+                <li><a href="#">服务</a></li>
+                <li><a href="#">社区</a></li>
+
+                <!-- 创建一个弹出层 -->
+                <div class="goods-info">
+                    <div class="top-goods">
+                        <form action="">
+                            <a href="tj.jsp?i=0"><img src="./img/Xiaomi1.webp" alt="">   <div >Xiaomi Civi 1S  <p>2299元</p> </div>  </a>
+                        <a href="tj.jsp?i=1"><img src="./img/Xiaomi2.webp" alt="">    <div >Xiaomi 12 Pro  <p>4199元</p> </div>  </a>
+                        <a href="tj.jsp?i=2" ><img src="./img/Xiaomi3.webp" alt=""> <div >Xiaomi 12    <p>3199元</p>  </div> </a>
+                        <a href="tj.jsp?i=3"><img src="./img/Xiaomi4.webp" alt=""> <div >Xiaomi 12X     <p>2399元</p></div> </a>
+                        <a href="tj.jsp?i=4"> <img src="./img/Xiaomi5.webp" alt=""> <div >Xiaomi 11 青春活力版 <p>1799元</p></div> </a>
+                        <a href="tj.jsp?i=5"> <img src="./img/Xiaomi6.webp" alt=""> <div >Xiaomi Civi <p>2299元</p></div> </a>
+                        </form>
+                    </div>
+                    <div class="top-goods">
+                        <a href="tj.jsp?i=6"><img src="./img/Redmi1.webp" alt="">  <div>RedmiNote 11 Pro+  <p> 1999元</p> </div>    </a>
+                        <a href="tj.jsp?i=7"><img src="./img/Redmi2.webp" alt="">    <div>RedmiNote 11T Pro <p>1699元</p> </div>  </a>
+                        <a href="tj.jsp?i=8"><img src="./img/Redmi3.webp" alt=""> <div>RedmiNote 11SE <p>999元</p>  </div> </a>
+                        <a href="tj.jsp?i=9"><img src="./img/Redmi4.webp" alt=""> <div>RedmiBook Pro 13 <p>649元</p></div> </a>
+                        <a href="tj.jsp?i=10"> <img src="./img/Redmi5.webp" alt=""> <div>Redmi 10A <p>2699元</p></div> </a>
+                        <a href="tj.jsp?i=11"> <img src="./img/Redmi6.webp" alt=""> <div>Redmi K50  Pro <p>2199元</p></div> </a>
+                    </div>
+                    <div class="top-goods">
+                        <a href="tj.jsp?i=12"><img src="./img/笔记本1.webp" alt="">  <div>RedmiBook Pro 14  <p> 5299元</p> </div>    </a>
+                        <a href="tj.jsp?i=13"><img src="./img/笔记本2.webp" alt="">    <div>RedmiBook Pro 15<p>5499元</p> </div>  </a>
+                        <a href="tj.jsp?i=14"><img src="./img/笔记本3.webp" alt=""> <div>RedmiBook Pro 14 锐龙版 <p>4699元</p>  </div> </a>
+                        <a href="tj.jsp?i=15"><img src="./img/笔记本4.webp" alt=""> <div>RedmiBook Pro 13 <p>5399元</p></div> </a>
+                        <a href="tj.jsp?i=16"> <img src="./img/笔记本5.webp" alt=""> <div>小米笔记本 Pro 14 锐龙版 <p>5499元</p></div> </a>
+                        <a href="tj.jsp?i=17"> <img src="./img/笔记本6.webp" alt=""> <div>Redmi G 2021 AMd <p>6499元</p></div> </a>
+                    </div>
+
+                </div>
+
+            </ul>
+        </div>
+        <!-- 创建搜索框的容器 -->
+        <div class="search-wrapper">
+            <form class="search" action="#">
+                <input class="search-inp" type="text" placeholder="小米">
+                <button class="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<!-- 创建banner的容器 -->
+<div class="banner-wrapper">
+
+    <div class="banner w">
+        <!-- 5个例图 -->
+        <ul class="img-list">
+            <li>
+                <a href="" class="li-img">
+                    <img src="./img/小米1.jpg" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="" class="li-img">
+                    <img src="./img/小米2.webp" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="" class="li-img">
+                    <img src="./img/小米3.webp" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="" class="li-img">
+                    <img src="./img/小米4.webp" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="" class="li-img">
+                    <img src="./img/小米5.webp" alt="">
+                </a>
+            </li>
+            <!-- 左侧弹出层 -->
+            <div id="goods2">
+                <div id="shouji">
+                    <a href="">
+                        <img src="./img/手机1.webp" alt="">note11 11 Pro+ <br> <p style="background-color:orange; width: 60px; margin-bottom: 20px;">立即购买</p>   <p style="background-color:#bfa;">加入购物车</p>
+                    </a>
+                    <a href="">
+                        <img src="./img/手机2.webp" alt="">Remid 10MA  <p style="background-color:orange; width: 60px; margin-bottom: 20px;">立即购买</p>   <p style="background-color:#bfa;">加入购物车</p>
+                    </a>
+                    <a href="">
+                        <img src="./img/手机3.webp" alt="">Xiaomi 12  <br> <br>   <p style="background-color:orange; width: 60px; margin-bottom: 20px;">立即购买</p>  <p style="background-color:#bfa;">加入购物车</p>
+                    </a>
+                    <a href="">
+                        <img src="./img/手机4.webp" alt="">Redmi K40  <br> <br>    <p style="background-color:orange; width: 60px; margin-bottom: 20px;">立即购买</p>   <p style="background-color:#bfa;">加入购物车</p>
+                    </a>
+                    <a href="">
+                        <img src="./img/手机5.webp" alt="">Note 11 Pro  <br> <br>   <p style="background-color:orange; width: 60px; margin-bottom: 20px;">立即购买 <p style="background-color:#bfa;">加入购物车</p>
+                    </a>
+                    <a href="">
+                        <img src="./img/手机6.webp" alt="">Redmi K50 Pro<p style="background-color:orange; width: 60px; margin-bottom: 20px;">立即购买</p>   <p style="background-color:#bfa;">加入购物车</p>
+                    </a>
+                    <a href="">
+                        <img src="./img/手机7.webp" alt="">Xiaomi 12X   <br> <br> <p style="background-color:orange; width: 60px; margin-bottom: 20px;">立即购买</p>   <p style="background-color:#bfa;">加入购物车</p>
+                    </a>
+                    <a href="">
+                        <img src="./img/手机8.webp" alt="">Xiaomi Civi  <br> <br>   <p style="background-color:orange; width: 60px; margin-bottom: 20px;">立即购买</p>   <p style="background-color:#bfa;">加入购物车</p>
+                    </a>
+                </div>
+                <div id="dianshi">
+                    <a href="">
+                        <img src="./img/电视1.webp" alt="">note11 11 Pro+       <p style="background-color:orange; width: 60px; margin-bottom: 20px;">立即购买</p>   <p style="background-color:#bfa;">加入购物车</p>
+                    </a>
+                    <a href="">
+                        <img src="./img/电视2.webp" alt="">Remid 10MA <p style="background-color:orange; width: 60px; margin-bottom: 20px;">立即购买</p>   <p style="background-color:#bfa;">加入购物车</p>
+                    </a>
+                    <a href="">
+                        <img src="./img/电视3.webp" alt="">Xiaomi 12<br> <br> <p style="background-color:orange; width: 60px; margin-bottom: 20px;">立即购买</p>   <p style="background-color:#bfa;">加入购物车</p>
+                    </a>
+                    <a href="">
+                        <img src="./img/电视4.webp" alt="">Redmi K40<br><br> <p style="background-color:orange; width: 60px; margin-bottom: 20px;">立即购买</p>   <p style="background-color:#bfa;">加入购物车</p>
+                    </a>
+                    <a href="">
+                        <img src="./img/电视5.webp" alt="">Note 11 Pro<br> <br><p style="background-color:orange; width: 60px; margin-bottom: 20px;">立即购买</p>   <p style="background-color:#bfa;">加入购物车</p>
+                    </a>
+                    <a href="">
+                        <img src="./img/电视6.webp" alt="">Redmi K50 Pro <p style="background-color:orange; width: 60px; margin-bottom: 20px;">立即购买</p>   <p style="background-color:#bfa;">加入购物车</p>
+                    </a>
+                    <a href="">
+                        <img src="./img/电视7.webp" alt="">Xiaomi 12X<br> <br><p style="background-color:orange; width: 60px; margin-bottom: 20px;">立即购买</p>   <p style="background-color:#bfa;">加入购物车</p>
+                    </a>
+                    <a href="">
+                        <img src="./img/电视8.webp" alt="">Xiaomi Civi<br> <br><p style="background-color:orange; width: 60px; margin-bottom: 20px;">立即购买</p>   <p style="background-color:#bfa;">加入购物车</p>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </ul>
+        <div class="pointer">
+            <a class="active" href="javascript:;" class="circle"></a>
+            <a href="javascript:;" class="circle"></a>
+            <a href="javascript:;" class="circle"></a>
+            <a href="javascript:;" class="circle"></a>
+            <a href="javascript:;" class="circle"></a>
+
+        </div>
+        <div class="prev-next">
+            <a class="prev" href="javascript:;"></a>
+            <a class="next" href="javascript:;"></a>
+        </div>
+    </div>
+</div>
+
+<div class="back-top">
+    <a href="#">
+        <img src="https://i8.mifile.cn/b2c-mimall-media/98a23aae70f25798192693f21c4d4039.png" alt="">
+        <span>手机APP</span>
+    </a>
+    <a href="#">
+        <img src="https://i8.mifile.cn/b2c-mimall-media/55cad219421bee03a801775e7309b920.png" alt="">
+        <span>个人中心</span>
+    </a>
+    <a href="#">
+        <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/12eb0965ab33dc8e05870911b90f3f13.png" alt="">
+        <span>售后服务</span>
+    </a>
+    <a href="#">
+        <img src="https://i8.mifile.cn/b2c-mimall-media/4f036ae4d45002b2a6fb6756cedebf02.png" alt="">
+        <span>人工客服</span>
+    </a>
+
+    <a href="#">
+        <img src="https://i8.mifile.cn/b2c-mimall-media/d7db56d1d850113f016c95e289e36efa.png" alt="">
+        <span>购物车</span>
+    </a>
+</div>
+
+<!-- 创建广告的容器 -->
+<div class="ac w">
+    <ul class="shortcut">
+        <li>
+            <a href="#">
+                <i class="fas fa-clock"></i>
+                保障服务
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fas fa-building"></i>
+                企业团购
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa-solid fa-f"></i>
+                F码通道
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa-solid fa-sd-card"></i>
+                米粉卡
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa-solid fa-dollar-sign"></i>
+                以旧换新
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa-solid fa-mobile-retro"></i>
+                话费充值
+            </a>
+        </li>
+    </ul>
+
+    <ul class="imgs">
+        <li>
+            <a href="#">
+                <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/0ab8e5096ac6f08bd632e4d5a15d1792.jpg?w=632&h=340" alt="">
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/c5f019908e21571fe48fdad0ebf79249.jpg?w=632&h=340" alt="">
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/28c13d0d11b38ec17fa5d83bc6ba5912.jpg?w=632&h=340" alt="">
+            </a>
+        </li>
+    </ul>
+</div>
+
+<script>
+
+</script>
+
+</body>
+</html>
